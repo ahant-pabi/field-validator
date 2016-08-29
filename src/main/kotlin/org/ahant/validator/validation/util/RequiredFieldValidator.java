@@ -1,11 +1,11 @@
-package org.ahant.inputvalidator.validation.util;
+package org.ahant.validator.validation.util;
 
 import com.google.common.collect.Sets;
-import org.ahant.inputvalidator.annotation.CollectionType;
-import org.ahant.inputvalidator.annotation.FieldInfo;
-import org.ahant.inputvalidator.annotation.Required;
-import org.ahant.inputvalidator.validation.FieldValidationType;
-import org.ahant.inputvalidator.validation.FieldValidatorType;
+import org.ahant.validator.annotation.CollectionType;
+import org.ahant.validator.annotation.FieldInfo;
+import org.ahant.validator.annotation.Required;
+import org.ahant.validator.validation.FieldValidationType;
+import org.ahant.validator.validation.FieldValidatorType;
 
 import java.lang.reflect.Field;
 import java.util.Collection;
@@ -13,9 +13,9 @@ import java.util.Iterator;
 import java.util.Set;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static org.ahant.inputvalidator.constants.ApplicationConstants.COLLECTION_MIN_SIZE_ERROR;
-import static org.ahant.inputvalidator.constants.ApplicationConstants.REQUIRED_FIELD_MISSING;
-import static org.ahant.inputvalidator.util.CommonUtil.isNotBlank;
+import static org.ahant.validator.constants.ApplicationConstants.COLLECTION_MIN_SIZE_ERROR;
+import static org.ahant.validator.constants.ApplicationConstants.REQUIRED_FIELD_MISSING;
+import static org.ahant.validator.util.CommonUtil.isNotBlank;
 
 /**
  * Created by ahant on 8/14/2016.

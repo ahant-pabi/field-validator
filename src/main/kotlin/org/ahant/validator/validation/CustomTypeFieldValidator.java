@@ -1,6 +1,6 @@
-package org.ahant.inputvalidator.validation;
+package org.ahant.validator.validation;
 
-import org.ahant.inputvalidator.validation.util.RequiredFieldValidator;
+import org.ahant.validator.validation.util.RequiredFieldValidator;
 
 import java.util.Set;
 

@@ -1,4 +1,4 @@
-package org.ahant.inputvalidator.constants;
+package org.ahant.validator.constants;
 
 /**
  * Created by ahant on 8/14/2016.

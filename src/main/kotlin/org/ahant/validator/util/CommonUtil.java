@@ -1,4 +1,4 @@
-package org.ahant.inputvalidator.util;
+package org.ahant.validator.util;
 
 import com.google.common.base.Strings;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package org.ahant.inputvalidator.annotation
+package org.ahant.validator.annotation
 
 /**
  * Created by ahant on 8/29/2016.

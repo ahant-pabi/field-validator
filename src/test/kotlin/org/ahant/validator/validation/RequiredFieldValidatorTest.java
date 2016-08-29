@@ -1,14 +1,14 @@
-package org.ahant.inputvalidator.validation;
+package org.ahant.validator.validation;
 
 import com.google.common.collect.ImmutableList;
-import org.ahant.inputvalidator.validation.util.RequiredFieldValidator;
+import org.ahant.validator.validation.util.RequiredFieldValidator;
 import org.testng.annotations.Test;
 
 import java.util.Date;
 import java.util.Set;
 
-import static org.ahant.inputvalidator.constants.ApplicationConstants.COLLECTION_MIN_SIZE_ERROR;
-import static org.ahant.inputvalidator.constants.ApplicationConstants.REQUIRED_FIELD_MISSING;
+import static org.ahant.validator.constants.ApplicationConstants.COLLECTION_MIN_SIZE_ERROR;
+import static org.ahant.validator.constants.ApplicationConstants.REQUIRED_FIELD_MISSING;
 import static org.testng.Assert.assertEquals;
 import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;

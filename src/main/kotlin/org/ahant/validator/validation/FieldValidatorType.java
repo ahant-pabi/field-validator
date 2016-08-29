@@ -1,6 +1,6 @@
-package org.ahant.inputvalidator.validation;
+package org.ahant.validator.validation;
 
-import static org.ahant.inputvalidator.constants.ApplicationConstants.*;
+import static org.ahant.validator.constants.ApplicationConstants.*;
 
 /**
  * Created by ahant on 8/14/2016.

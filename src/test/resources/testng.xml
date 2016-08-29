@@ -3,7 +3,7 @@
 <suite name="InputValidator Test Suite">
     <test name="Validation">
         <packages>
-            <package name="org.ahant.inputvalidator.validation.*" />
+            <package name="org.ahant.validator.validation.*" />
         </packages>
     </test>
 </suite>

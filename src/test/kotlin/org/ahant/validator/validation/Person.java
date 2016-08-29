@@ -1,12 +1,12 @@
-package org.ahant.inputvalidator.validation;
+package org.ahant.validator.validation;
 
-import org.ahant.inputvalidator.annotation.CollectionType;
-import org.ahant.inputvalidator.annotation.FieldInfo;
+import org.ahant.validator.annotation.CollectionType;
+import org.ahant.validator.annotation.FieldInfo;
 
 import java.util.Date;
 import java.util.List;
 
-import static org.ahant.inputvalidator.validation.FieldValidatorType.*;
+import static org.ahant.validator.validation.FieldValidatorType.*;
 
 /**
  * Created by ahant on 8/22/2016.

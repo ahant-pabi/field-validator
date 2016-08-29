@@ -1,10 +1,10 @@
-package org.ahant.inputvalidator.validation;
+package org.ahant.validator.validation;
 
 import com.google.common.collect.ImmutableSet;
 
 import java.util.Set;
 
-import static org.ahant.inputvalidator.util.CommonUtil.isNotBlank;
+import static org.ahant.validator.util.CommonUtil.isNotBlank;
 
 /**
  * Created by ahant on 8/14/2016.

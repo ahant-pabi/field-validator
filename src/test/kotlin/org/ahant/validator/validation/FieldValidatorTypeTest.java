@@ -1,11 +1,11 @@
-package org.ahant.inputvalidator.validation;
+package org.ahant.validator.validation;
 
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.AssertJUnit.assertNull;
-import static org.ahant.inputvalidator.constants.ApplicationConstants.*;
+import static org.ahant.validator.constants.ApplicationConstants.*;
 /**
  * Created by ahant on 8/23/2016.
  */

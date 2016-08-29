@@ -1,10 +1,10 @@
-package org.ahant.inputvalidator.validation;
+package org.ahant.validator.validation;
 
-import org.ahant.inputvalidator.annotation.FieldInfo;
-import org.ahant.inputvalidator.annotation.Required;
+import org.ahant.validator.annotation.FieldInfo;
+import org.ahant.validator.annotation.Required;
 
-import static org.ahant.inputvalidator.validation.FieldValidatorType.STRING;
-import static org.ahant.inputvalidator.validation.FieldValidatorType.ZIP;
+import static org.ahant.validator.validation.FieldValidatorType.STRING;
+import static org.ahant.validator.validation.FieldValidatorType.ZIP;
 
 /**
  * Created by ahant on 7/16/2016.

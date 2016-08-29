@@ -1,4 +1,4 @@
-package org.ahant.inputvalidator.validation;
+package org.ahant.validator.validation;
 
 import java.util.Set;
 

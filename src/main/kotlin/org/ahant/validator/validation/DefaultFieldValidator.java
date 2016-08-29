@@ -1,4 +1,4 @@
-package org.ahant.inputvalidator.validation;
+package org.ahant.validator.validation;
 
 import com.google.common.collect.ImmutableSet;
 
