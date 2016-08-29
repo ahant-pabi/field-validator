@@ -1,0 +1,27 @@
+group 'org.ahant:input-validator'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlin_version = '1.0.3'
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'kotlin'
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile 'com.google.guava:guava:19.0'
+    compile 'org.slf4j:slf4j-api:1.7.18'
+    compile 'org.slf4j:slf4j-simple:1.7.18'
+    testCompile 'org.testng:testng:6.9.10'
+    testCompile 'org.uncommons:reportng:1.1.4'
+    testCompile 'org.mockito:mockito-all:1.10.19'
+}
+repositories {
+    mavenCentral()
+}

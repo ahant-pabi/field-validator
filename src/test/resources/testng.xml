@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="InputValidator Test Suite">
+    <test name="Validation">
+        <packages>
+            <package name="org.ahant.inputvalidator.validation.*" />
+        </packages>
+    </test>
+</suite>
