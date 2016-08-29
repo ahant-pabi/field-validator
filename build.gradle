@@ -1,4 +1,4 @@
-group 'org.ahant:input-validator'
+group 'org.ahant:field-validator'
 version '1.0-SNAPSHOT'
 
 buildscript {
