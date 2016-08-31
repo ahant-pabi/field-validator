@@ -1,16 +1,14 @@
 package org.ahant.validator.validation
 
 import com.google.common.collect.ImmutableList
-import org.ahant.validator.validation.util.RequiredFieldValidator
-import org.testng.annotations.Test
-
-import java.util.Date
-
 import org.ahant.validator.constants.ApplicationConstants.COLLECTION_MIN_SIZE_ERROR
 import org.ahant.validator.constants.ApplicationConstants.REQUIRED_FIELD_MISSING
+import org.ahant.validator.validation.util.RequiredFieldValidator
 import org.testng.Assert.assertEquals
-import org.testng.AssertJUnit.assertFalse
-import org.testng.AssertJUnit.assertTrue
+import org.testng.Assert.assertFalse
+import org.testng.Assert.assertTrue
+import org.testng.annotations.Test
+import java.util.*
 
 /**
  * Created by ahant on 8/22/2016.
@@ -48,7 +46,7 @@ class RequiredFieldValidatorTest {
         clazz.birthDate = Date()
         clazz.fullName = "Pabitra Muni"
         clazz.gender = Gender.MALE
-        clazz.contactNumberList = ImmutableList.of<Any>()
+        clazz.contactNumberList = ImmutableList.of()
         clazz.address = Address()
         val result = RequiredFieldValidator.validate(clazz, FieldValidationType.FAIL_FAST)
         assertFalse(result.isEmpty())
@@ -76,7 +74,7 @@ class RequiredFieldValidatorTest {
         val result = RequiredFieldValidator.validate(clazz, FieldValidationType.FAIL_FAST)
         assertFalse(result.isEmpty())
         assertEquals(result.size, 1)
-        assertEquals(result.iterator().next(), String.format(getREQUIRED_FIELD_MISSING(), "fullName"))
+        assertEquals(result.iterator().next(), String.format(REQUIRED_FIELD_MISSING, "fullName"))
     }
 
     private val address: Address

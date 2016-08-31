@@ -3,16 +3,10 @@ package org.ahant.validator.validation.util
 import com.google.common.collect.Sets
 import org.ahant.validator.annotation.CollectionType
 import org.ahant.validator.annotation.FieldInfo
-import org.ahant.validator.annotation.Required
-import org.ahant.validator.validation.FieldValidationType
-import org.ahant.validator.validation.FieldValidatorType
-
-import java.lang.reflect.Field
-
-import com.google.common.base.Preconditions.checkArgument
 import org.ahant.validator.constants.ApplicationConstants.COLLECTION_MIN_SIZE_ERROR
 import org.ahant.validator.constants.ApplicationConstants.REQUIRED_FIELD_MISSING
-import org.ahant.validator.util.CommonUtil.isNotBlank
+import org.ahant.validator.util.CommonUtil.Companion.isNotBlank
+import org.ahant.validator.validation.FieldValidationType
 
 /**
  * Created by ahant on 8/14/2016.
@@ -23,9 +17,8 @@ object RequiredFieldValidator {
      * Get all the declared fields of 'type' object and invoke their respective field validators. throw exception if validator returns false.
      * The thrown exception must be of type Application exception with message as required field missing along with field name.
      */
-    fun validate(type: Any?, validationType: FieldValidationType): Set<String> {
-        checkArgument(type != null, "type can't be null")
-        return performFieldValidation(type, validationType, type!!.javaClass.getAnnotation(Required::class.java) != null)
+    fun validate(type: Any, validationType: FieldValidationType): Set<String> {
+        return performFieldValidation(type, validationType)
     }
 
     /**
@@ -40,13 +33,13 @@ object RequiredFieldValidator {
      * *
      * @return returns a set of error messages, if any or empty. It never returns `null`.
      */
-    private fun performFieldValidation(type: Any, validationType: FieldValidationType, requiredAnnotationPresent: Boolean): Set<String> {
+    private fun performFieldValidation(type: Any, validationType: FieldValidationType): Set<String> {
         val errors = Sets.newHashSet<String>()
         val fields = type.javaClass.declaredFields
         for (field in fields) {
             field.isAccessible = true
             val info = field.getAnnotation(FieldInfo::class.java)
-            var fieldValue: Any? = null
+            var fieldValue: Any?
             try {
                 fieldValue = field.get(type)
             } catch (e: IllegalAccessException) {
@@ -63,37 +56,36 @@ object RequiredFieldValidator {
             if (info != null && !info.optional && fieldValue == null) {
                 errors.add(getExceptionMessage(fieldName))
             }
-            //continue if there are no errors OR validation type is {@code FieldValidationType.CONTINUE}
-            if (fieldValue != null && (FieldValidationType.CONTINUE == validationType || errors.isEmpty())) {
-                val validator = if (info != null) info.validatorType else FieldValidatorType.DEFAULT
-                var fieldError: MutableSet<String>? = Sets.newHashSet<String>()
+            /**
+             * continue if 1) the field has a non null value
+             * 2) there are no errors OR validation type is {@code FieldValidationType.CONTINUE}
+             * 3) the field a validator type declared
+             */
+            if (fieldValue != null && (FieldValidationType.CONTINUE == validationType || errors.isEmpty()) && (info != null)) {
+                val validator = info.validatorType
+                var fieldError: Set<String> = Sets.newHashSet<String>()
                 val collectionAnnotation = field.getAnnotation(CollectionType::class.java)
                 if (collectionAnnotation == null) {
                     fieldError = validator.get().validate(fieldValue)
                 } else {
-                    val collectionData = fieldValue as Collection<*>?
-                    if (collectionData!!.size < collectionAnnotation.minSize) {
+                    val collectionData = fieldValue as Collection<*>
+                    if (collectionData.size < collectionAnnotation.minSize) {
                         errors.add(getCollectionErrorMessage(fieldName, collectionAnnotation.minSize))
                     } else {
                         val collectionFieldIterator = collectionData.iterator()
                         while (collectionFieldIterator.hasNext()) {
                             val collectionValue = collectionFieldIterator.next()
-                            val tempErrors = validator.get().validate(collectionValue)
-                            if (tempErrors != null) {
-                                fieldError!!.addAll(tempErrors)
-                            }
+                            val tempErrors = validator.get().validate(collectionValue as Any)
+                            fieldError.plus(tempErrors)
                         }
                     }
                 }
-                if (fieldError != null) {
-                    errors.addAll(fieldError)
-                }
+                errors.addAll(fieldError)
             }
             if (FieldValidationType.FAIL_FAST == validationType && !errors.isEmpty()) {
                 break
             }
         }
-
         return errors
     }
 

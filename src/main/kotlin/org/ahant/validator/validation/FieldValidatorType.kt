@@ -1,5 +1,6 @@
 package org.ahant.validator.validation
 
+import com.google.common.collect.ImmutableSet
 import org.ahant.validator.constants.ApplicationConstants.DATE_REGEX
 import org.ahant.validator.constants.ApplicationConstants.EMAIL_REGEX
 import org.ahant.validator.constants.ApplicationConstants.INVALID_DATE
@@ -12,7 +13,7 @@ import org.ahant.validator.constants.ApplicationConstants.ZIP_CODE_REGEX
 /**
  * Created by ahant on 8/14/2016.
  */
-enum class FieldValidatorType constructor(private val validator: FieldValidator<*>) {
+enum class FieldValidatorType constructor(private val validator: FieldValidator<Any>) {
     DEFAULT(DefaultFieldValidator()),
     STRING(StringFieldValidator()),
     PHONE(StringFieldValidator(PHONE_NUMBER_REGEX, INVALID_PHONE)),
@@ -21,7 +22,11 @@ enum class FieldValidatorType constructor(private val validator: FieldValidator<
     DATE(StringFieldValidator(DATE_REGEX, INVALID_DATE)),
     CUSTOM(CustomTypeFieldValidator());
 
-    fun get(): FieldValidator<*> {
-        return validator
+    fun get(): FieldValidator<Any> = validator
+
+    class DefaultFieldValidator : FieldValidator<Any> {
+        override fun validate(input: Any): Set<String> {
+            return ImmutableSet.of()
+        }
     }
 }

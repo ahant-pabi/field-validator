@@ -1,6 +1,5 @@
 package org.ahant.validator.validation
 
-import com.google.common.base.Preconditions.checkArgument
 import org.ahant.validator.validation.util.RequiredFieldValidator
 
 /**
@@ -8,8 +7,7 @@ import org.ahant.validator.validation.util.RequiredFieldValidator
  */
 internal class CustomTypeFieldValidator : FieldValidator<Any> {
 
-    override fun validate(type: Any): Set<String> {
-        checkArgument(type != null, type!!.javaClass.simpleName + "can't be null")
-        return RequiredFieldValidator.validate(type, FieldValidationType.FAIL_FAST)
+    override fun validate(input: Any): Set<String> {
+        return RequiredFieldValidator.validate(input, FieldValidationType.FAIL_FAST)
     }
 }

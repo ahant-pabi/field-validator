@@ -1,7 +1,6 @@
 package org.ahant.validator.annotation
 
 import org.ahant.validator.validation.FieldValidatorType
-
 /**
  * Created by ahant on 8/28/2016.
  */

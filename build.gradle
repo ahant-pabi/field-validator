@@ -10,8 +10,24 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
-
 apply plugin: 'kotlin'
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useTestNG() {
+        parallel = "tests"
+        useDefaultListeners = false
+        listeners = ['org.uncommons.reportng.HTMLReporter']
+        suiteXmlFiles = fileTree(dir: "${rootDir}/src/test/resources", include: "testng.xml") as List
+    }
+    testLogging.showStandardStreams = true
+    ignoreFailures = false
+    reports.junitXml.enabled = false
+    reports.html.enabled = false
+}
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -19,9 +35,7 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.18'
     compile 'org.slf4j:slf4j-simple:1.7.18'
     testCompile 'org.testng:testng:6.9.10'
+    testCompile 'com.google.inject:guice:4.0'
     testCompile 'org.uncommons:reportng:1.1.4'
     testCompile 'org.mockito:mockito-all:1.10.19'
-}
-repositories {
-    mavenCentral()
 }

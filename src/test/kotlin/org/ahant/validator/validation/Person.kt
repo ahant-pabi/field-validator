@@ -11,7 +11,7 @@ import java.util.*
 class Person {
     @FieldInfo(validatorType = STRING, optional = false)
     var fullName: String? = null
-    private var birthDate: Date? = null
+    var birthDate: Date? = null
     var gender: Gender? = null
     @FieldInfo(name = "contactNumber", validatorType = PHONE, optional = false)
     @CollectionType
@@ -21,13 +21,5 @@ class Person {
     @FieldInfo(name = "email", validatorType = EMAIL)
     var emailAddress: String? = null
     @FieldInfo(optional = false)
-    private val score: Int = 0
-
-    fun getBirthDate(): Date {
-        return Date(birthDate!!.time)
-    }
-
-    fun setBirthDate(birthDate: Date) {
-        this.birthDate = Date(birthDate.time)
-    }
+    val score: Int = 0
 }

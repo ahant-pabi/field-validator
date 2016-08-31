@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="InputValidator Test Suite">
+<suite name="FieldValidator Test Suite">
     <test name="Validation">
         <packages>
             <package name="org.ahant.validator.validation.*" />

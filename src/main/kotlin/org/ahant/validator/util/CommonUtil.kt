@@ -1,6 +1,5 @@
 package org.ahant.validator.util
 
-import com.google.common.base.Strings
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import kotlin.reflect.KClass
@@ -22,7 +21,7 @@ class CommonUtil private constructor() {
         private var logger: Logger? = null
 
         fun isBlank(input: String): Boolean {
-            return Strings.isNullOrEmpty(input)
+            return input.isEmpty()
         }
 
         fun isNotBlank(input: String): Boolean {
