@@ -1,5 +1,5 @@
-group 'org.ahant:field-validator'
-version '1.0-SNAPSHOT'
+group 'org.ahant'
+version '1.0'
 
 buildscript {
     ext.kotlin_version = '1.0.3'
@@ -38,4 +38,24 @@ dependencies {
     testCompile 'com.google.inject:guice:4.0'
     testCompile 'org.uncommons:reportng:1.1.4'
     testCompile 'org.mockito:mockito-all:1.10.19'
+}
+
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "file://"+System.getProperty("user.home") + "/.m2/repository")
+        }
+    }
 }
