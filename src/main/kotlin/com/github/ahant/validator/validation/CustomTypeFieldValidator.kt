@@ -1,6 +1,6 @@
-package org.ahant.validator.validation
+package com.github.ahant.validator.validation
 
-import org.ahant.validator.validation.util.RequiredFieldValidator
+import com.github.ahant.validator.validation.util.RequiredFieldValidator
 
 /**
  * Created by ahant on 8/14/2016.

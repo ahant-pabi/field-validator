@@ -1,7 +1,7 @@
-package org.ahant.validator.validation
+package com.github.ahant.validator.validation
 
 import com.google.common.collect.ImmutableSet
-import org.ahant.validator.util.CommonUtil.Companion.isNotBlank
+import com.github.ahant.validator.util.CommonUtil.Companion.isNotBlank
 /**
  * Created by ahant on 8/14/2016.
  */

@@ -1,9 +1,9 @@
-package org.ahant.validator.validation
+package com.github.ahant.validator.validation
 
+import com.github.ahant.validator.constants.ApplicationConstants.COLLECTION_MIN_SIZE_ERROR
+import com.github.ahant.validator.constants.ApplicationConstants.REQUIRED_FIELD_MISSING
+import com.github.ahant.validator.validation.util.RequiredFieldValidator
 import com.google.common.collect.ImmutableList
-import org.ahant.validator.constants.ApplicationConstants.COLLECTION_MIN_SIZE_ERROR
-import org.ahant.validator.constants.ApplicationConstants.REQUIRED_FIELD_MISSING
-import org.ahant.validator.validation.util.RequiredFieldValidator
 import org.testng.Assert.assertEquals
 import org.testng.Assert.assertFalse
 import org.testng.Assert.assertTrue

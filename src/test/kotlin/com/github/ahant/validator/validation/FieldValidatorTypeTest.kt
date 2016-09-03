@@ -1,9 +1,9 @@
-package org.ahant.validator.validation
+package com.github.ahant.validator.validation
 
-import org.ahant.validator.constants.ApplicationConstants.INVALID_DATE
-import org.ahant.validator.constants.ApplicationConstants.INVALID_EMAIL
-import org.ahant.validator.constants.ApplicationConstants.INVALID_PHONE
-import org.ahant.validator.constants.ApplicationConstants.INVALID_ZIP
+import com.github.ahant.validator.constants.ApplicationConstants.INVALID_DATE
+import com.github.ahant.validator.constants.ApplicationConstants.INVALID_EMAIL
+import com.github.ahant.validator.constants.ApplicationConstants.INVALID_PHONE
+import com.github.ahant.validator.constants.ApplicationConstants.INVALID_ZIP
 import org.testng.Assert.assertEquals
 import org.testng.Assert.assertNotNull
 import org.testng.Assert.assertTrue

@@ -1,4 +1,4 @@
-package org.ahant.validator.util
+package com.github.ahant.validator.util
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -31,10 +31,10 @@ class CommonUtil private constructor() {
         fun log(clazz: KClass<*>, severity: LogSeverity, msg: String) {
             logger = LoggerFactory.getLogger(clazz.javaObjectType)
             when (severity) {
-                CommonUtil.LogSeverity.DEBUG -> logger!!.debug(msg)
-                CommonUtil.LogSeverity.INFO -> logger!!.info(msg)
-                CommonUtil.LogSeverity.WARN -> logger!!.warn(msg)
-                CommonUtil.LogSeverity.ERROR -> logger!!.error(msg)
+                LogSeverity.DEBUG -> logger!!.debug(msg)
+                LogSeverity.INFO -> logger!!.info(msg)
+                LogSeverity.WARN -> logger!!.warn(msg)
+                LogSeverity.ERROR -> logger!!.error(msg)
             }
         }
 

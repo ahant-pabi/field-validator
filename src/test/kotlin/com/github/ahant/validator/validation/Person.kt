@@ -1,8 +1,8 @@
-package org.ahant.validator.validation
+package com.github.ahant.validator.validation
 
-import org.ahant.validator.annotation.CollectionType
-import org.ahant.validator.annotation.FieldInfo
-import org.ahant.validator.validation.FieldValidatorType.*
+import com.github.ahant.validator.annotation.CollectionType
+import com.github.ahant.validator.annotation.FieldInfo
+import com.github.ahant.validator.validation.FieldValidatorType.*
 import java.util.*
 
 /**

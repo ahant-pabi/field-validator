@@ -1,8 +1,8 @@
-package org.ahant.validator.validation
+package com.github.ahant.validator.validation
 
-import org.ahant.validator.annotation.FieldInfo
-import org.ahant.validator.validation.FieldValidatorType.STRING
-import org.ahant.validator.validation.FieldValidatorType.ZIP
+import com.github.ahant.validator.annotation.FieldInfo
+import com.github.ahant.validator.validation.FieldValidatorType.STRING
+import com.github.ahant.validator.validation.FieldValidatorType.ZIP
 
 /**
  * Created by ahant on 7/16/2016.

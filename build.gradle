@@ -1,18 +1,19 @@
 group 'com.github.ahant-pabi'
-version '1.0'
-
-sourceCompatibility = $jdkVersion
+version "${app_version}"
 
 buildscript {
-    ext.kotlin_version = '1.0.3'
     repositories {
         mavenCentral()
     }
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin_version}"
+        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.5.3"
     }
 }
 apply plugin: 'kotlin'
+apply plugin: 'io.codearte.nexus-staging'
+
+sourceCompatibility = "${jdk_version}"
 
 repositories {
     mavenCentral()
@@ -32,7 +33,7 @@ test {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
     compile 'com.google.guava:guava:19.0'
     compile 'org.slf4j:slf4j-api:1.7.18'
     compile 'org.slf4j:slf4j-simple:1.7.18'
@@ -52,10 +53,80 @@ jar {
     }
 }
 
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+archivesBaseName = rootProject.name
+
+nexusStaging{
+    username = ossrhUser
+    password = ossrhPassword
+}
+
+//uploadArchives.dependsOn test
+
 uploadArchives {
+    outputs.upToDateWhen {false}
     repositories {
         mavenDeployer {
-            repository(url: "file://"+System.getProperty("user.home") + "/.m2/repository")
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            if (project.hasProperty("release")) {
+                // Publish to OSSRH(maven central staging repo)
+                repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                    authentication(userName: ossrhUser, password: ossrhPassword)
+                }
+                // Publish to OSSRH(maven central snapshot repo)
+                snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
+                    authentication(userName: ossrhUser, password: ossrhUser)
+                }
+            } else {
+                // Publish to local repo
+                repository(url: "file://" + System.getProperty("user.home") + "/.m2/repository")
+            }
+            pom.project {
+                name rootProject.name
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'Annotation based input field validator.'
+                url 'https://github.com/ahant-pabi/field-validator'
+
+                scm {
+                    connection 'scm:git:https://github.com/ahant-pabi/field-validator.git'
+                    developerConnection 'scm:git:https://github.com/ahant-pabi/field-validator.git'
+                    url 'https://github.com/ahant-pabi/field-validator.git'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'ahant'
+                        name 'Pabitra Muni'
+                        email 'mailtopabi@gmail.com'
+                    }
+                }
+            }
         }
     }
 }
