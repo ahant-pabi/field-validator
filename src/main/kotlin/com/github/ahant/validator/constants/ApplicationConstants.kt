@@ -3,7 +3,7 @@ package com.github.ahant.validator.constants
 /**
  * Created by ahant on 8/14/2016.
  */
-object ApplicationConstants {
+internal object ApplicationConstants {
     val REQUIRED_FIELD_MISSING = "Required field missing: \'%s\'"
     val COLLECTION_MIN_SIZE_ERROR = "A minimum of %d values are required for field \'%s\'"
     val PHONE_NUMBER_REGEX = "\\s*(?:\\+?(\\d{1,3}))?[-. (]*(\\d{3})[-. )]*(\\d{3})[-. ]*(\\d{4})(?: *x(\\d+))?\\s*"

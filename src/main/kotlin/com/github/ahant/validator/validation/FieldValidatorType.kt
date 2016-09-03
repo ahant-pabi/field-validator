@@ -22,7 +22,7 @@ enum class FieldValidatorType constructor(private val validator: FieldValidator<
     DATE(StringFieldValidator(DATE_REGEX, INVALID_DATE)),
     CUSTOM(CustomTypeFieldValidator());
 
-    fun get(): FieldValidator<Any> = validator
+    internal fun get(): FieldValidator<Any> = validator
 
     private class DefaultFieldValidator : FieldValidator<Any> {
         override fun validate(input: Any): Set<String> {

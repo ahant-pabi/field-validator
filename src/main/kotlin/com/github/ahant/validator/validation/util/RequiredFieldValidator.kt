@@ -4,10 +4,9 @@ import com.github.ahant.validator.annotation.CollectionType
 import com.github.ahant.validator.annotation.FieldInfo
 import com.github.ahant.validator.constants.ApplicationConstants.COLLECTION_MIN_SIZE_ERROR
 import com.github.ahant.validator.constants.ApplicationConstants.REQUIRED_FIELD_MISSING
-import com.github.ahant.validator.util.CommonUtil.Companion.isNotBlank
+import com.github.ahant.validator.util.CommonUtil.isNotBlank
 import com.github.ahant.validator.validation.FieldValidationType
 import com.google.common.collect.Sets
-
 /**
  * Created by ahant on 8/14/2016.
  */
