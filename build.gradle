@@ -1,5 +1,7 @@
-group 'org.ahant'
+group 'com.github.ahant-pabi'
 version '1.0'
+
+sourceCompatibility = $jdkVersion
 
 buildscript {
     ext.kotlin_version = '1.0.3'
@@ -43,13 +45,11 @@ dependencies {
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-artifacts {
-    archives sourcesJar
+jar {
+    manifest {
+        attributes 'Implementation-Title': rootProject.name,
+                'Implementation-Version': version
+    }
 }
 
 uploadArchives {
