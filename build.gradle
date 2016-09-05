@@ -1,6 +1,10 @@
 group 'com.github.ahant-pabi'
 version "${app_version}"
 
+ext {
+    forPublishing = project.hasProperty("publish")
+}
+
 buildscript {
     repositories {
         mavenCentral()
@@ -11,7 +15,9 @@ buildscript {
     }
 }
 apply plugin: 'kotlin'
-apply plugin: 'io.codearte.nexus-staging'
+if (forPublishing) {
+    apply plugin: 'io.codearte.nexus-staging'
+}
 
 sourceCompatibility = "${jdk_version}"
 
@@ -66,64 +72,67 @@ task sourcesJar(type: Jar) {
 artifacts {
     archives javadocJar, sourcesJar
 }
+if (forPublishing) {
+    signing {
+        sign configurations.archives
+    }
 
-signing {
-    sign configurations.archives
-}
+    archivesBaseName = rootProject.name
 
-archivesBaseName = rootProject.name
+    nexusStaging {
+        username = ossrhUser
+        password = ossrhPassword
+    }
 
-nexusStaging{
-    username = ossrhUser
-    password = ossrhPassword
-}
+    uploadArchives.dependsOn test
 
-//uploadArchives.dependsOn test
+    uploadArchives {
+        outputs.upToDateWhen { false }
+        repositories {
+            mavenDeployer {
+                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-uploadArchives {
-    outputs.upToDateWhen {false}
-    repositories {
-        mavenDeployer {
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-            if (project.hasProperty("release")) {
-                // Publish to OSSRH(maven central staging repo)
-                repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                    authentication(userName: ossrhUser, password: ossrhPassword)
-                }
-                // Publish to OSSRH(maven central snapshot repo)
-                snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
-                    authentication(userName: ossrhUser, password: ossrhUser)
-                }
-            } else {
-                // Publish to local repo
-                repository(url: "file://" + System.getProperty("user.home") + "/.m2/repository")
-            }
-            pom.project {
-                name rootProject.name
-                packaging 'jar'
-                // optionally artifactId can be defined here
-                description 'Annotation based input field validator.'
-                url 'https://github.com/ahant-pabi/field-validator'
-
-                scm {
-                    connection 'scm:git:https://github.com/ahant-pabi/field-validator.git'
-                    developerConnection 'scm:git:https://github.com/ahant-pabi/field-validator.git'
-                    url 'https://github.com/ahant-pabi/field-validator.git'
-                }
-
-                licenses {
-                    license {
-                        name 'The Apache License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                if (project.property("publish") == "remote") {
+                    println "Artifacts will be published to central maven repo"
+                    // Publish to OSSRH(maven central staging repo)
+                    repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                        authentication(userName: ossrhUser, password: ossrhPassword)
                     }
+                    // Publish to OSSRH(maven central snapshot repo)
+                    snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
+                        authentication(userName: ossrhUser, password: ossrhUser)
+                    }
+                } else {
+                    // Publish to local repo
+                    println "Artifacts will be published to local maven repo"
+                    repository(url: "file://" + System.getProperty("user.home") + "/.m2/repository")
                 }
+                pom.project {
+                    name rootProject.name
+                    packaging 'jar'
+                    // optionally artifactId can be defined here
+                    description 'Annotation based input field validator.'
+                    url 'https://github.com/ahant-pabi/field-validator'
 
-                developers {
-                    developer {
-                        id 'ahant'
-                        name 'Pabitra Muni'
-                        email 'mailtopabi@gmail.com'
+                    scm {
+                        connection 'scm:git:https://github.com/ahant-pabi/field-validator.git'
+                        developerConnection 'scm:git:https://github.com/ahant-pabi/field-validator.git'
+                        url 'https://github.com/ahant-pabi/field-validator.git'
+                    }
+
+                    licenses {
+                        license {
+                            name 'The Apache License, Version 2.0'
+                            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id 'ahant'
+                            name 'Pabitra Muni'
+                            email 'mailtopabi@gmail.com'
+                        }
                     }
                 }
             }
