@@ -5,3 +5,8 @@ Annotation based input field validator
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.ahant-pabi/field-validator/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.ahant-pabi/field-validator)
 
 Please see [WIKI](https://github.com/ahant-pabi/field-validator/wiki) for usage with examples.
+
+## Future Roadmap
+1. Support for other country for zip code and phone number validation
+2. Support for user provided error messages
+3. Suporrt for user provided validators
