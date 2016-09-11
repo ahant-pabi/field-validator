@@ -9,4 +9,4 @@ Please see [WIKI](https://github.com/ahant-pabi/field-validator/wiki) for usage 
 ## Future Roadmap
 1. Support for other country for zip code and phone number validation
 2. Support for user provided error messages
-3. Suporrt for user provided validators
+3. Support for user provided validators
