@@ -2,8 +2,11 @@ package com.github.ahant.validator.validation
 
 import com.github.ahant.validator.annotation.CollectionType
 import com.github.ahant.validator.annotation.FieldInfo
-import com.github.ahant.validator.validation.FieldValidatorType.*
-import java.util.*
+import com.github.ahant.validator.validation.FieldValidatorType.CUSTOM
+import com.github.ahant.validator.validation.FieldValidatorType.EMAIL
+import com.github.ahant.validator.validation.FieldValidatorType.PHONE
+import com.github.ahant.validator.validation.FieldValidatorType.STRING
+import java.util.Date
 
 /**
  * Created by ahant on 8/22/2016.

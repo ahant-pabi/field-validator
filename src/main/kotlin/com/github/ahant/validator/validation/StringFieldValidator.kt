@@ -5,7 +5,7 @@ import com.google.common.collect.ImmutableSet
 /**
  * Created by ahant on 8/14/2016.
  */
-internal class StringFieldValidator : FieldValidator<Any> {
+internal open class StringFieldValidator : FieldValidator<Any> {
 
     private var regEx = ""
     private var msg = ""
@@ -20,6 +20,10 @@ internal class StringFieldValidator : FieldValidator<Any> {
         this.msg = msg
         this.maxLength = maxLength
         this.minLength = minLength
+    }
+
+    protected fun setRegEx(newRegEx : String){
+        this.regEx = newRegEx
     }
 
     override fun validate(input: Any): Set<String> {
