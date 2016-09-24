@@ -7,6 +7,7 @@ import com.github.ahant.validator.constants.ApplicationConstants.REQUIRED_FIELD_
 import com.github.ahant.validator.util.CommonUtil.isNotBlank
 import com.github.ahant.validator.validation.FieldValidationType
 import com.google.common.collect.Sets
+
 /**
  * Created by ahant on 8/14/2016.
  */
@@ -56,16 +57,18 @@ object RequiredFieldValidator {
                 errors.add(getExceptionMessage(fieldName))
             }
             /**
-             * continue if 1) the field has a non null value
+             * continue if
+             * 1) the field has a non null value
              * 2) there are no errors OR validation type is {@code FieldValidationType.CONTINUE}
              * 3) the field a validator type declared
              */
             if (fieldValue != null && (FieldValidationType.CONTINUE == validationType || errors.isEmpty()) && (info != null)) {
-                val validator = info.validatorType
+                val validator = info.validatorType.get()
+                validator.setCountry(info.countryCode)
                 var fieldError: Set<String> = Sets.newHashSet<String>()
                 val collectionAnnotation = field.getAnnotation(CollectionType::class.java)
                 if (collectionAnnotation == null) {
-                    fieldError = validator.get().validate(fieldValue)
+                    fieldError = validator.validate(fieldValue)
                 } else {
                     val collectionData = fieldValue as Collection<*>
                     if (collectionData.size < collectionAnnotation.minSize) {
@@ -74,7 +77,7 @@ object RequiredFieldValidator {
                         val collectionFieldIterator = collectionData.iterator()
                         while (collectionFieldIterator.hasNext()) {
                             val collectionValue = collectionFieldIterator.next()
-                            val tempErrors = validator.get().validate(collectionValue as Any)
+                            val tempErrors = validator.validate(collectionValue as Any)
                             fieldError.plus(tempErrors)
                         }
                     }

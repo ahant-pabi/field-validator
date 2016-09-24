@@ -17,7 +17,7 @@ enum class FieldValidatorType constructor(private val validator: FieldValidator<
     DEFAULT(DefaultFieldValidator()),
     STRING(StringFieldValidator()),
     PHONE(StringFieldValidator(PHONE_NUMBER_REGEX, INVALID_PHONE)),
-    ZIP(StringFieldValidator(INDIA_ZIP_CODE_REGEX, INVALID_ZIP)),
+    ZIP(ZipCodeValidator(INDIA_ZIP_CODE_REGEX, INVALID_ZIP)),
     EMAIL(StringFieldValidator(EMAIL_REGEX, INVALID_EMAIL, 30, 10)),
     DATE(StringFieldValidator(DATE_REGEX, INVALID_DATE)),
     CUSTOM(CustomTypeFieldValidator());

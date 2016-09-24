@@ -3,7 +3,7 @@
 <suite name="FieldValidator Test Suite">
     <test name="Validation">
         <packages>
-            <package name="org.ahant.validator.validation.*" />
+            <package name="com.github.ahant.validator.validation.*" />
         </packages>
     </test>
 </suite>

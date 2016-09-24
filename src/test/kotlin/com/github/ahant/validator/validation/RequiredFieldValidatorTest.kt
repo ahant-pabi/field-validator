@@ -85,6 +85,7 @@ class RequiredFieldValidatorTest {
             address.city = "Hyderabad"
             address.state = "Telangana"
             address.zip = "500049"
+            address.usZip = "50049"
             return address
         }
 }
